@@ -5,4 +5,5 @@ html, body {
 
 .hello {
 	color: red;
+	background: url('./4.jpg');
 }
