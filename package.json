@@ -6,6 +6,7 @@
   "scripts": {
     "build": "webpack",
     "watch": "webpack --watch",
+    "start": "webpack-dev-server --open",
     "clean": "rm -rf ./dist/bundle.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,6 +21,7 @@
     "html-webpack-plugin": "^2.30.1",
     "style-loader": "^0.18.2",
     "webpack": "^3.4.1",
+    "webpack-dev-server": "^2.6.1",
     "xml-loader": "^1.2.1"
   },
   "dependencies": {
