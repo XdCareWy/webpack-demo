@@ -7,9 +7,9 @@
 4. 在浏览器中打开index.html
 
 # Note
-这个分支使用了两个插件,分别是
-1. html-webpack-plugin
-2. clean-webpack-plugin
+这个分支主要介绍了
+1. 使用devtool来丁文error和warning
+2. 开发阶段每次更新源码都要手动去编译文件，使用webpack watch mode和webpack-dev-server即可解决，还有一种是使用中间件，不做介绍。
 
 
 
