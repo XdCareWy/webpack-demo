@@ -7,10 +7,9 @@
 4. 在浏览器中打开index.html
 
 # Note
-这个分支主要介绍了
-1. 使用devtool来丁文error和warning
-2. 开发阶段每次更新源码都要手动去编译文件，使用webpack watch mode和webpack-dev-server即可解决，还有一种是使用中间件，不做介绍。
-
+这个分支主要介绍了使用HMR
+1. 使用过程中会出现一个问题，当你更新print.js的时候，点击按钮出来的结果不是更新后的值。
+[Gotchas](https://webpack.js.org/guides/hot-module-replacement/#gotchas)
 
 
 # FQA
