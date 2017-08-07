@@ -7,15 +7,13 @@
 4. 在浏览器中打开index.html
 
 # Note
-这个分支使用了两个插件,分别是
-1. html-webpack-plugin
-2. clean-webpack-plugin
+这个分支介绍了如何使用lazy or on demand
 
 
 
 # FQA
 这个学习过程是看webpack官方文档一步一步学习的，有问题可以一起交流。
-[这个分支的官方文档](https://webpack.js.org/guides/output-management/)
+[这个分支的官方文档](https://webpack.js.org/guides/lazy-loading/)
 
 # License
 MIT
