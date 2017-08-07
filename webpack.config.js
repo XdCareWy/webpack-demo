@@ -7,13 +7,12 @@ module.exports = {
 		app: './src/index.js'
 	},
 	output: {
-		filename: '[name].bundle.js',
-		path: path.resolve(__dirname, 'dist'),
-		chunkFilename: '[name].bundle.js'
+		filename: '[name].[chunkhash].js',
+		path: path.resolve(__dirname, 'dist')
 	},
 	plugins: [
 		new HtmlWebpackplugin({
-			title: 'Code Splitting'
+			title: 'Caching'
 		}),
 		new CleanWebpackplugin(['dist'])
 	]
