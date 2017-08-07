@@ -1,11 +1,12 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackplugin = require('html-webpack-plugin');
 const CleanWebpackplugin = require('clean-webpack-plugin');
 
 module.exports = {
 	entry: {
 		app: './src/index.js',
-		print: './src/print.js'
+		another: './src/another-module.js'
 	},
 	output: {
 		filename: '[name].bundle.js',
@@ -15,6 +16,9 @@ module.exports = {
 		new HtmlWebpackplugin({
 			title: 'output Management'
 		}),
-		new CleanWebpackplugin(['dist'])
+		new CleanWebpackplugin(['dist']),
+		new webpack.optimize.CommonsChunkPlugin({
+			name: 'common'
+		})
 	]
 };
