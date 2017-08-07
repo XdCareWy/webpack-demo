@@ -19,6 +19,7 @@ module.exports = {
 			title: 'Caching'
 		}),
 		new CleanWebpackplugin(['dist']),
+		new webpack.HashedModuleIdsPlugin(),
 		new webpack.optimize.CommonsChunkPlugin({
 			name: 'vendor'
 		}),
