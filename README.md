@@ -10,6 +10,7 @@
 # Note
 这个分支主要介绍了webpack里面的tree shaking。主要查看打包后的文件中哪些被打包了，哪些被exports了。
 
+- 在打包的时候将webpack.config.js去除掉
 
 
 # FQA
