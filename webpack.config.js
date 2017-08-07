@@ -5,7 +5,10 @@ const CleanWebpackplugin = require('clean-webpack-plugin');
 
 module.exports = {
 	entry: {
-		app: './src/index.js'
+		app: './src/index.js',
+		vendor: [
+			'lodash'
+		]
 	},
 	output: {
 		filename: '[name].[chunkhash].js',
@@ -16,6 +19,9 @@ module.exports = {
 			title: 'Caching'
 		}),
 		new CleanWebpackplugin(['dist']),
+		new webpack.optimize.CommonsChunkPlugin({
+			name: 'vendor'
+		}),
 		new webpack.optimize.CommonsChunkPlugin({
 			name: 'runtime'
 		})
