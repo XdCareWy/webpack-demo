@@ -3,19 +3,18 @@
 # Step
 1. ```git clone git@github.com:XdCareWy/webpack-demo.git```
 2. ```npm install```
-3. ```npm run build```
-4. 在浏览器中打开index.html
+3. 开发打包：```./node_modules/.bin/webpack ./tree-shaking/main.js ./tree-shaking/main.bundle.js```
+4. 上线打包：```./node_modules/.bin/webpack --optimize-minimize ./tree-shaking/main.js ./tree-shaking/main.bundle.js```
+5. 在浏览器中打开index.html
 
 # Note
-这个分支主要介绍了使用HMR
-1. 使用过程中会出现一个问题，当你更新print.js的时候，点击按钮出来的结果不是更新后的值。
-[Gotchas](https://webpack.js.org/guides/hot-module-replacement/#gotchas)
-2. 添加style.css并添加处理css的loader，HMR将会热更新css模块
-3. 在index.js里最后一段代码，不写也是可以的，但是还没理解教程里为什么要写这段。
+这个分支主要介绍了webpack里面的tree shaking。主要查看打包后的文件中哪些被打包了，哪些被exports了。
+
+
 
 # FQA
 这个学习过程是看webpack官方文档一步一步学习的，有问题可以一起交流。
-[这个分支的官方文档](https://webpack.js.org/guides/output-management/)
+[这个分支的官方文档](https://webpack.js.org/guides/tree-shaking/)
 
 # License
 MIT
