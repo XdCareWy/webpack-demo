@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackplugin = require('html-webpack-plugin');
 const CleanWebpackplugin = require('clean-webpack-plugin');
 
@@ -14,6 +15,9 @@ module.exports = {
 		new HtmlWebpackplugin({
 			title: 'Caching'
 		}),
-		new CleanWebpackplugin(['dist'])
+		new CleanWebpackplugin(['dist']),
+		new webpack.optimize.CommonsChunkPlugin({
+			name: 'runtime'
+		})
 	]
 };
