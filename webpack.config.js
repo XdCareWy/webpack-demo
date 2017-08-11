@@ -7,13 +7,13 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
 	entry: {
 		app: './src/index.js',
-		vendor: ['lodash']
+		vendor: ['lodash', 'react', 'react-dom']
 	},
 	output: {
 		filename: '[name].bundle.js',
 		path: path.resolve(__dirname, 'dist')
 	},
-	devtool: 'cheap-eval-source-map',
+	devtool: 'source-map',
 	devServer: {
 		contentBase: './dist',
 		hot: true,
@@ -38,22 +38,37 @@ module.exports = {
 				})
 			},
 			{
-				test: /\.less$/,
+				test: /\.less$/i,
 				use: ExtractTextPlugin.extract({
 					fallback: 'style-loader',
 					use: ['css-loader', 'less-loader']
 				})
+			},
+			{
+				test: /\.(jpg|png|gif)$/i,
+				use: [
+					{
+						loader: 'url-loader',
+						options: {
+							limit: 8192
+						}
+					}
+				]
+			},
+			{
+				test: /\.(woff|woff2|eot|ttf|otf)$/,
+				use: ['file-loader']
+			},
+			{
+				test: /\.js[x]?$/,
+				exclude: /node_modules/,
+				use: {
+					loader: 'babel-loader',
+					options: {
+						presets: ['env']
+					}
+				}
 			}
-			// {
-			// 	test: /\.js$/,
-			// 	exclude: /(node_modules)/,
-			// 	use: {
-			// 		loader: 'babel-loader',
-			// 		options: {
-			// 			presets: ['env']
-			// 		}
-			// 	}
-			// }
 		]
 	},
 	plugins: [
@@ -67,11 +82,14 @@ module.exports = {
 		new webpack.optimize.CommonsChunkPlugin({
 			name: 'vendor',
 			filename: 'vendor.[hash].js',
-			minChunk: Infinity
+			minChunks: Infinity
 		}),
 		new webpack.optimize.CommonsChunkPlugin({
 			name: 'runtime'
 		}),
-		new ExtractTextPlugin("main.css")
+		new ExtractTextPlugin({
+			filename: "main.css",
+			allChunks: true
+		})
 	]
 };
