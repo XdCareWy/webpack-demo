@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const HtmlWebpackplugin = require('html-webpack-plugin');
 const CleanWebpackplugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const node_modules = path.resolve(__dirname, 'node_modules');
 
 module.exports = {
 	entry: {
@@ -29,6 +30,7 @@ module.exports = {
 		}
 	},
 	module: {
+		noParse: path.resolve(node_modules, '*/**/*.min.js'),
 		rules: [
 			{
 				test: /\.css$/,
@@ -61,7 +63,7 @@ module.exports = {
 			},
 			{
 				test: /\.js[x]?$/,
-				exclude: /node_modules/,
+				exclude: /(node_modules|vendor)/,
 				use: {
 					loader: 'babel-loader',
 					options: {
