@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const HtmlWebpackplugin = require('html-webpack-plugin');
 const CleanWebpackplugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const node_modules = path.resolve(__dirname, 'node_modules');
 
 module.exports = {
@@ -92,6 +93,7 @@ module.exports = {
 		new ExtractTextPlugin({
 			filename: "main.css",
 			allChunks: true
-		})
+		}),
+		new BundleAnalyzerPlugin()
 	]
 };

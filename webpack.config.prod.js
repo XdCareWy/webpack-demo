@@ -2,6 +2,9 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackplugin = require('html-webpack-plugin');
 const CleanWebpackplugin = require('clean-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const node_modules = path.resolve(__dirname, 'node_modules');
 
 module.exports = {
 	entry: {
@@ -17,18 +20,43 @@ module.exports = {
 		rules: [
 			{
 				test: /\.css$/,
-				use: ['style-loader', 'css-loader']
+				use: ExtractTextPlugin.extract({
+					fallback: 'style-loader',
+					use: 'css-loader'
+				})
 			},
-			// {
-			// 	test: /\.js$/,
-			// 	exclude: /(node_modules)/,
-			// 	use: {
-			// 		loader: 'babel-loader',
-			// 		options: {
-			// 			presets: ['env']
-			// 		}
-			// 	}
-			// }
+			{
+				test: /\.less$/i,
+				use: ExtractTextPlugin.extract({
+					fallback: 'style-loader',
+					use: ['css-loader', 'less-loader']
+				})
+			},
+			{
+				test: /\.(jpg|png|gif)$/i,
+				use: [
+					{
+						loader: 'url-loader',
+						options: {
+							limit: 8192
+						}
+					}
+				]
+			},
+			{
+				test: /\.(woff|woff2|eot|ttf|otf)$/,
+				use: ['file-loader']
+			},
+			{
+				test: /\.js[x]?$/,
+				exclude: /(node_modules|vendor)/,
+				use: {
+					loader: 'babel-loader',
+					options: {
+						presets: ['env']
+					}
+				}
+			}
 		]
 	},
 	plugins: [
@@ -41,9 +69,11 @@ module.exports = {
 			name: 'vendor',
 			filename: 'vendor.[hash:8].js'
 		}),
-		new webpack.optimize.CommonsChunkPlugin({
-			name: 'runtime'
+		new webpack.optimize.UglifyJsPlugin(),
+		new ExtractTextPlugin({
+			filename: "main.css",
+			allChunks: true
 		}),
-		new webpack.optimize.UglifyJsPlugin()
+		new BundleAnalyzerPlugin()
 	]
 };
