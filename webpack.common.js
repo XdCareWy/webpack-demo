@@ -1,6 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const node_modules = path.resolve(__dirname, "node_modules");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   entry: {
@@ -25,6 +26,28 @@ module.exports = {
         }
       },
       {
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, "css-loader"]
+      },
+      {
+        test: /\.less$/i,
+        use: [
+          { loader: MiniCssExtractPlugin.loader },
+          { loader: "css-loader" },
+          {
+            loader: "less-loader",
+            options: {
+              modifyVars: {
+                "primary-color": "#ff0000",
+                "link-color": "#1DA57A",
+                "border-radius-base": "2px"
+              },
+              javascriptEnabled: true
+            }
+          }
+        ]
+      },
+      {
         test: /\.(jpg|png|gif|svg)$/i,
         use: [
           {
@@ -42,11 +65,15 @@ module.exports = {
     ]
   },
   plugins: [
+    new MiniCssExtractPlugin({
+      filename: "[name].[hash].css",
+      chunkFilename: "[id].css"
+    }),
     new HtmlWebpackPlugin({
       title: "demo",
       template: "./src/index.html",
       inject: true
-    }),
+    })
   ],
   optimization: {
     splitChunks: {
