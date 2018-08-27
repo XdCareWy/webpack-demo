@@ -1,7 +1,13 @@
 node_modules/
-
+.DS_Store
+.vscode/
+.atom
 npm-debug.log*
-
 dist/
-
 .idea
+*.class
+*.lock
+*.log
+*.pyc
+*.swp
+package-lock.json

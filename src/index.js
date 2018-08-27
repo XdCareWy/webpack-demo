@@ -1,27 +1,30 @@
-import _ from 'lodash';
-import printMe from './print.js';
-import style from './style.css';
-import less from './demo.less';
-import image from './7.jpg';
-import app from './app.jsx';
+import React from "react";
+import ReactDOM from "react-dom";
+import img from "./7.jpg";
+import { Button } from 'antd';
+import "./style.css";
+import Styled from "styled-components";
 
-function component() {
-  var element = document.createElement('div');
-  var btn = document.createElement('button');
-  var img = new Image();
-  img.width = 100;
-  img.src = image;
+const App = () => {
+  return (
+    <div>
+      <div className="box" />
+      <div className="img" />
+      <div>
+        <img width={100} src={img} alt="aaaaaaaaaaaaaaaaa" />
+      </div>
+      <Button type="primary">确认</Button>
+      <Div />
+    </div>
+  );
+};
 
-  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+const Div = Styled.div`
+  margin: 10px;
+  background-color: red;
+  width: 100px;
+  height: 100px;
+`;
 
-  btn.innerHTML = 'Click me and check1 this console';
-  btn.onclick = printMe;
+ReactDOM.render(<App />, document.getElementById("app"));
 
-  element.appendChild(btn);
-  element.appendChild(img);
-
-
-  return element;
-}
-
-document.body.appendChild(component());
