@@ -4,6 +4,9 @@ const CleanWebpackPlugin = require("clean-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const node_modules = path.resolve(__dirname, "node_modules");
 
+const e1 = new ExtractTextPlugin("[name].css");
+const common = new ExtractTextPlugin("[name].css");
+
 module.exports = {
   entry: {
     app: "./src/index.js"
@@ -29,7 +32,12 @@ module.exports = {
       {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
+          fallback: {
+            loader: "style-loader",
+            options: {
+              minimize: true
+            }
+          },
           use: "css-loader"
         })
       },
@@ -78,7 +86,7 @@ module.exports = {
       inject: true
     }),
     new ExtractTextPlugin({
-      filename: "main.css",
+      filename: "[name].[hash].css",
       allChunks: true
     })
   ],

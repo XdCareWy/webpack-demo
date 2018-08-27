@@ -1,19 +1,5 @@
-html,
-body {
-  margin: 0;
-  padding: 0;
-}
-
-.box {
-  width: 200px;
+.a {
+  width: 400px;
   height: 200px;
-  border: 10px solid #ddd;
-}
-.img {
-  width: 200px;
-  height: 100px;
-  background: url("./7.jpg") no-repeat;
-}
-img {
-  width: 200px;
+  border: 1px solid red;
 }
