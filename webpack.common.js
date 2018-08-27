@@ -1,11 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const CleanWebpackPlugin = require("clean-webpack-plugin");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const node_modules = path.resolve(__dirname, "node_modules");
-
-const e1 = new ExtractTextPlugin("[name].css");
-const common = new ExtractTextPlugin("[name].css");
 
 module.exports = {
   entry: {
@@ -30,38 +25,6 @@ module.exports = {
         }
       },
       {
-        test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: {
-            loader: "style-loader",
-            options: {
-              minimize: true
-            }
-          },
-          use: "css-loader"
-        })
-      },
-      {
-        test: /\.less$/i,
-        use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
-          use: [
-            { loader: "css-loader" },
-            {
-              loader: "less-loader",
-              options: {
-                modifyVars: {
-                  "primary-color": "#ff0000",
-                  "link-color": "#1DA57A",
-                  "border-radius-base": "2px"
-                },
-                javascriptEnabled: true
-              }
-            }
-          ]
-        })
-      },
-      {
         test: /\.(jpg|png|gif|svg)$/i,
         use: [
           {
@@ -79,16 +42,11 @@ module.exports = {
     ]
   },
   plugins: [
-    new CleanWebpackPlugin(["dist"]),
     new HtmlWebpackPlugin({
       title: "demo",
       template: "./src/index.html",
       inject: true
     }),
-    new ExtractTextPlugin({
-      filename: "[name].[hash].css",
-      allChunks: true
-    })
   ],
   optimization: {
     splitChunks: {
