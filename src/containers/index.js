@@ -1,5 +1,3 @@
-import Todos from "./Todos";
+import Todos from './Todos';
 
-export {
-  Todos
-}
+export { Todos };

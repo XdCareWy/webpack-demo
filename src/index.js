@@ -1,9 +1,9 @@
-import React, { Fragment } from "react";
-import ReactDOM from "react-dom";
-import { createStore } from "redux";
-import Counter from "./containers/Counter";
-import reducer from "./reducers/index";
-import { Todos } from "./containers/index";
+import React, { Fragment } from 'react';
+import ReactDOM from 'react-dom';
+import { createStore } from 'redux';
+import Counter from './containers/Counter';
+import reducer from './reducers/index';
+import { Todos } from './containers/index';
 
 const store = createStore(
   reducer,
@@ -16,7 +16,7 @@ const render = () => {
       <Todos store={store} />
       <Counter store={store} />
     </Fragment>,
-    document.getElementById("app")
+    document.getElementById('app')
   );
 };
 

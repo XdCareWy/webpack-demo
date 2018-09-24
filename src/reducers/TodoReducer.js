@@ -1,16 +1,16 @@
-import _ from "lodash";
+import _ from 'lodash';
 
 const TodoReducer = (state = [], action) => {
   switch (action.type) {
-    case "ADD":
+    case 'ADD':
       return [...state, action.payload];
-    case "REMOVE": {
+    case 'REMOVE': {
       const newState = _.cloneDeep(state);
       const index = newState.findIndex(item => item.id === action.payload);
       newState.splice(index, 1);
       return newState;
     }
-    case "CHECKED": {
+    case 'CHECKED': {
       const newState = _.cloneDeep(state);
       newState.forEach(item => {
         if (item.id === action.payload) {

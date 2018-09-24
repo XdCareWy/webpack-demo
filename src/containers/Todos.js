@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import { Input } from "antd";
-import { TodoList } from "../components/TodoList";
-import Styled from "styled-components";
+import React, { Component } from 'react';
+import { Input } from 'antd';
+import { TodoList } from '../components/TodoList';
+import Styled from 'styled-components';
 
 class Todos extends Component {
   constructor() {
     super();
     this.state = {
-      inputValue: ""
+      inputValue: ''
     };
   }
 
@@ -19,14 +19,14 @@ class Todos extends Component {
     const val = e.target.value;
     const { store } = this.props;
     store.dispatch({
-      type: "ADD",
+      type: 'ADD',
       payload: {
         id: Math.random(),
         value: val,
         finished: false
       }
     });
-    this.setState({ inputValue: "" });
+    this.setState({ inputValue: '' });
   };
 
   render() {
@@ -34,22 +34,18 @@ class Todos extends Component {
     const { inputValue } = this.state;
     return (
       <Div>
-        <Input
-          value={inputValue}
-          onChange={this.handleInput}
-          onPressEnter={this.handlePress}
-        />
+        <Input value={inputValue} onChange={this.handleInput} onPressEnter={this.handlePress} />
         <TodoList
           list={store.getState().todos}
           onChecked={key =>
             store.dispatch({
-              type: "CHECKED",
+              type: 'CHECKED',
               payload: key
             })
           }
           onRemove={key =>
             store.dispatch({
-              type: "REMOVE",
+              type: 'REMOVE',
               payload: key
             })
           }

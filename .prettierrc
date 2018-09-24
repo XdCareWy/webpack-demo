@@ -1,0 +1,9 @@
+{
+  "printWidth": 100,
+  "parser": "babylon",
+  "singleQuote": true,
+  "semi": true,
+  "tabWidth": 2,
+  "arrowParens": "avoid",
+  "jsxBracketSameLine": true
+}

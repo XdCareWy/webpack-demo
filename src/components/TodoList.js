@@ -1,5 +1,5 @@
-import React from "react";
-import { Checkbox } from "antd";
+import React from 'react';
+import { Checkbox } from 'antd';
 
 export const TodoList = ({ list, onChecked, onRemove }) => {
   return list.map(({ id, value, finished }) => (
@@ -12,5 +12,5 @@ export const TodoList = ({ list, onChecked, onRemove }) => {
 };
 
 export const Todo = ({ value, finished }) => (
-  <span style={{ textDecoration: finished && "line-through" }}>{value}</span>
+  <span style={{ textDecoration: finished && 'line-through' }}>{value}</span>
 );
