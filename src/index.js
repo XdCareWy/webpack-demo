@@ -4,6 +4,7 @@ import { createStore } from 'redux';
 import Counter from './containers/Counter';
 import reducer from './reducers/index';
 import { Todos } from './containers/index';
+import DateRange from './common/DateRange';
 
 const store = createStore(
   reducer,
@@ -15,6 +16,7 @@ const render = () => {
     <Fragment>
       <Todos store={store} />
       <Counter store={store} />
+      <DateRange />
     </Fragment>,
     document.getElementById('app')
   );

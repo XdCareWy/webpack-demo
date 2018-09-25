@@ -1,11 +1,11 @@
-const common = require("./webpack.common.js");
-const merge = require("webpack-merge");
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-const CleanWebpackPlugin = require("clean-webpack-plugin");
+const common = require('./webpack.common.js');
+const merge = require('webpack-merge');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = merge(common, {
-  mode: "production",
+  mode: 'production',
   optimization: {
     minimizer: [
       new OptimizeCSSAssetsPlugin({}),
@@ -18,7 +18,5 @@ module.exports = merge(common, {
       })
     ]
   },
-  plugins: [
-    new CleanWebpackPlugin(["dist"]),
-  ]
+  plugins: [new CleanWebpackPlugin(['dist'])]
 });
