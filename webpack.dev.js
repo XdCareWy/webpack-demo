@@ -1,13 +1,16 @@
-const common = require("./webpack.common.js");
-const merge = require("webpack-merge");
-const webpack = require("webpack");
-const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
-  .BundleAnalyzerPlugin;
+const common = require('./webpack.common.js');
+const merge = require('webpack-merge');
+const webpack = require('webpack');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = merge(common, {
-  devtool: "source-map",
+  devtool: 'source-map',
   devServer: {
-    contentBase: "./dist",
+    overlay: {
+      warnings: true,
+      errors: true
+    },
+    contentBase: './dist',
     hot: true,
     historyApiFallback: true,
     port: 8989,
@@ -16,14 +19,11 @@ module.exports = merge(common, {
     },
     inline: true,
     proxy: {
-      "/api": {
-        target: "http://rapapi.org/mockjsdata/13981/"
+      '/api': {
+        target: 'http://rapapi.org/mockjsdata/13981/'
       }
     }
   },
-  mode: "development",
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new BundleAnalyzerPlugin()
-  ]
+  mode: 'development',
+  plugins: [new webpack.HotModuleReplacementPlugin(), new BundleAnalyzerPlugin()]
 });
