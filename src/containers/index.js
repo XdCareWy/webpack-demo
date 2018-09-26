@@ -1,4 +1,5 @@
 import AddTodos from './AddTodos';
 import TodoList from './TodoList';
+import DataList from './DataList';
 
-export { AddTodos, TodoList };
+export { AddTodos, TodoList, DataList };

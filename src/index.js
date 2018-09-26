@@ -7,7 +7,7 @@ import zhCN from 'antd/lib/locale-provider/zh_CN';
 import Styled from 'styled-components';
 import Counter from './containers/Counter';
 import reducer from './reducers/index';
-import { AddTodos, TodoList } from './containers/index';
+import { AddTodos, TodoList, DataList } from './containers/index';
 
 const store = createStore(
   reducer,
@@ -19,6 +19,7 @@ const App = () => (
     <AddTodos />
     <TodoList />
     <Counter />
+    <DataList />
   </Div>
 );
 
