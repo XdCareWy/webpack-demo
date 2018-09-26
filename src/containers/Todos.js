@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { Input } from 'antd';
 import { TodoList } from '../components/TodoList';
 import Styled from 'styled-components';
+import { addTodo, removeTodo, toggleTodo } from '../action/Todos';
 
 class Todos extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       inputValue: ''
     };
@@ -18,14 +19,12 @@ class Todos extends Component {
   handlePress = e => {
     const val = e.target.value;
     const { store } = this.props;
-    store.dispatch({
-      type: 'ADD',
-      payload: {
-        id: Math.random(),
-        value: val,
-        finished: false
-      }
-    });
+    const newTodo = {
+      id: Math.random(),
+      value: val,
+      finished: false
+    };
+    store.dispatch(addTodo(newTodo));
     this.setState({ inputValue: '' });
   };
 
@@ -37,18 +36,8 @@ class Todos extends Component {
         <Input value={inputValue} onChange={this.handleInput} onPressEnter={this.handlePress} />
         <TodoList
           list={store.getState().todos}
-          onChecked={key =>
-            store.dispatch({
-              type: 'CHECKED',
-              payload: key
-            })
-          }
-          onRemove={key =>
-            store.dispatch({
-              type: 'REMOVE',
-              payload: key
-            })
-          }
+          onChecked={key => store.dispatch(toggleTodo(key))}
+          onRemove={key => store.dispatch(removeTodo(key))}
         />
       </Div>
     );

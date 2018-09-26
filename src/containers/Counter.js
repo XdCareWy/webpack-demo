@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { CounterTitle } from '../components/CounterTitle';
 import { Button } from 'antd';
 import Styled from 'styled-components';
+import { increase, decrease } from '../action/Counter';
 
 class Counter extends Component {
   render() {
@@ -9,8 +10,8 @@ class Counter extends Component {
     return (
       <Div>
         <CounterTitle value={store.getState().counter} />
-        <ButtonCSS onClick={() => store.dispatch({ type: 'INCREASE' })}>+</ButtonCSS>
-        <ButtonCSS onClick={() => store.dispatch({ type: 'DECREASE' })}>-</ButtonCSS>
+        <ButtonCSS onClick={() => store.dispatch(increase())}>+</ButtonCSS>
+        <ButtonCSS onClick={() => store.dispatch(decrease())}>-</ButtonCSS>
       </Div>
     );
   }
