@@ -1,3 +1,4 @@
-import Todos from './Todos';
+import AddTodos from './AddTodos';
+import TodoList from './TodoList';
 
-export { Todos };
+export { AddTodos, TodoList };

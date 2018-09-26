@@ -1,30 +1,21 @@
-import React, { Component } from 'react';
-import { CounterTitle } from '../components/CounterTitle';
-import { Button } from 'antd';
-import Styled from 'styled-components';
+import { connect } from 'react-redux';
+import { Counter } from '../components/Counter';
 import { increase, decrease } from '../action/Counter';
 
-class Counter extends Component {
-  render() {
-    const { store } = this.props;
-    return (
-      <Div>
-        <CounterTitle value={store.getState().counter} />
-        <ButtonCSS onClick={() => store.dispatch(increase())}>+</ButtonCSS>
-        <ButtonCSS onClick={() => store.dispatch(decrease())}>-</ButtonCSS>
-      </Div>
-    );
-  }
-}
+const mapStateToProps = state => {
+  return {
+    value: state.counter
+  };
+};
 
-export default Counter;
+const mapDispatchToProps = dispatch => {
+  return {
+    increase: () => dispatch(increase()),
+    decrease: () => dispatch(decrease())
+  };
+};
 
-const ButtonCSS = Styled(Button)`
-  width: 50px;
-  margin: 10px;
-`;
-
-const Div = Styled.div`
-  width: 800px;
-  margin: 20px auto;
-`;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Counter);
