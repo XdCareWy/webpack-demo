@@ -1,8 +1,37 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import moment from 'moment';
 import { DatePicker } from 'antd';
+import { Button } from 'antd/lib/index';
+import Styled from 'styled-components';
+import { getSomeDayAgo } from '../utils';
 
 class DateRanges extends Component {
+  static getBtnCheckedByDate(start = 0, end = 0) {
+    const seven = getSomeDayAgo(1, 7);
+    const fifteen = getSomeDayAgo(1, 15);
+    const thirty = getSomeDayAgo(1, 30);
+    if (start === seven[0] && end === seven[1]) {
+      return {
+        sevenChecked: true,
+        fifteenChecked: false,
+        thirtyChecked: false
+      };
+    }
+    if (start === fifteen[0] && end === fifteen[1]) {
+      return {
+        sevenChecked: false,
+        fifteenChecked: true,
+        thirtyChecked: false
+      };
+    }
+    if (start === thirty[0] && end === thirty[1]) {
+      return {
+        sevenChecked: false,
+        fifteenChecked: false,
+        thirtyChecked: true
+      };
+    }
+  }
   constructor(props) {
     super(props);
     this.state = {
@@ -10,7 +39,10 @@ class DateRanges extends Component {
       endStatus: false,
       startValue: null,
       endValue: null,
-      visible: false
+      visible: false,
+      sevenChecked: false,
+      fifteenChecked: false,
+      thirtyChecked: false
     };
   }
 
@@ -20,9 +52,10 @@ class DateRanges extends Component {
       const { startValue: start, endValue: end } = prevState;
       const startValue = value[0] ? moment(value[0]) : start;
       const endValue = value[1] ? moment(value[1]) : end;
+      const checked = DateRanges.getBtnCheckedByDate(value[0], value[1]);
       const mid = moment(startValue);
       const last = mid.add(6, 'M');
-      return { last: last, startValue: startValue, endValue: endValue };
+      return { last: last, startValue: startValue, endValue: endValue, ...checked };
     }
     return null;
   }
@@ -134,44 +167,118 @@ class DateRanges extends Component {
     }
   };
 
+  handleDay = e => {
+    const btnName = e.target.name;
+    let value = getSomeDayAgo(1, 181);
+    let sevenChecked = false;
+    let fifteenChecked = false;
+    let thirtyChecked = false;
+    switch (btnName) {
+      case 'seven':
+        value = getSomeDayAgo(1, 7);
+        sevenChecked = true;
+        fifteenChecked = false;
+        thirtyChecked = false;
+        break;
+      case 'fifteen':
+        value = getSomeDayAgo(1, 15);
+        sevenChecked = false;
+        fifteenChecked = true;
+        thirtyChecked = false;
+        break;
+      case 'thirty':
+        value = getSomeDayAgo(1, 30);
+        sevenChecked = false;
+        fifteenChecked = false;
+        thirtyChecked = true;
+        break;
+      default:
+        value = getSomeDayAgo(1, 181);
+        sevenChecked = false;
+        fifteenChecked = false;
+        thirtyChecked = false;
+    }
+    this.setState({
+      startValue: value[0],
+      endValue: value[1],
+      sevenChecked: sevenChecked,
+      fifteenChecked: fifteenChecked,
+      thirtyChecked: thirtyChecked
+    });
+    this.triggerChange(value);
+  };
+
   render() {
-    const { isDate = true, isTime = true } = this.props;
-    const { startStatus, endStatus, startValue = null, endValue = null, visible } = this.state;
+    const { isDate = true, isTime = true, hiddenBtn = false } = this.props;
+    const {
+      startStatus,
+      endStatus,
+      startValue = null,
+      endValue = null,
+      visible,
+      sevenChecked,
+      fifteenChecked,
+      thirtyChecked
+    } = this.state;
 
     return (
       <div style={{ position: 'relative', height: '54px' }}>
-        <div>
-          <DatePicker
-            value={startValue}
-            open={startStatus}
-            onOpenChange={this.onStartOpenChange}
-            format="YYYY-MM-DD HH:mm:ss"
-            showTime={{
-              defaultValue: moment('00:00:00', 'HH:mm:ss')
-            }}
-            placeholder="开始时间"
-            showToday={false}
-            onChange={this.onStartChange}
-            disabledDate={isDate ? this.disabledStartDate : null}
-            disabledTime={isTime ? this.disabledStartTime : null}
-            onOk={this.onStartOk}
-          />
-          <span style={{ margin: '0 5px' }}>-</span>
-          <DatePicker
-            value={endValue}
-            open={endStatus}
-            showTime={{
-              defaultValue: moment('23:59:59', 'HH:mm:ss')
-            }}
-            placeholder="结束时间"
-            onOpenChange={this.onEndOpenChange}
-            format="YYYY-MM-DD HH:mm:ss"
-            showToday={false}
-            onChange={this.onEndChange}
-            disabledDate={isDate ? this.disabledEndDate : null}
-            disabledTime={isTime ? this.disabledEndTime : null}
-            onOk={this.onEndOk}
-          />
+        <div style={{ display: 'flex' }}>
+          <div>
+            <DatePicker
+              value={startValue}
+              open={startStatus}
+              onOpenChange={this.onStartOpenChange}
+              format="YYYY-MM-DD HH:mm:ss"
+              showTime={{
+                defaultValue: moment('00:00:00', 'HH:mm:ss')
+              }}
+              placeholder="开始时间"
+              showToday={false}
+              onChange={this.onStartChange}
+              disabledDate={isDate ? this.disabledStartDate : null}
+              disabledTime={isTime ? this.disabledStartTime : null}
+              onOk={this.onStartOk}
+            />
+            <span style={{ margin: '0 5px' }}>-</span>
+            <DatePicker
+              value={endValue}
+              open={endStatus}
+              showTime={{
+                defaultValue: moment('23:59:59', 'HH:mm:ss')
+              }}
+              placeholder="结束时间"
+              onOpenChange={this.onEndOpenChange}
+              format="YYYY-MM-DD HH:mm:ss"
+              showToday={false}
+              onChange={this.onEndChange}
+              disabledDate={isDate ? this.disabledEndDate : null}
+              disabledTime={isTime ? this.disabledEndTime : null}
+              onOk={this.onEndOk}
+            />
+          </div>
+          {!hiddenBtn && (
+            <Fragment>
+              <ButtonStyle
+                name="seven"
+                type={sevenChecked ? 'primary' : 'default'}
+                onClick={e => this.handleDay(e)}>
+                近7天
+              </ButtonStyle>
+              <ButtonStyle
+                name="fifteen"
+                type={fifteenChecked ? 'primary' : 'default'}
+                onClick={e => this.handleDay(e)}>
+                近15天
+              </ButtonStyle>
+              <ButtonStyle
+                name="thirty"
+                type={thirtyChecked ? 'primary' : 'default'}
+                onClick={e => this.handleDay(e)}>
+                近30天
+              </ButtonStyle>
+            </Fragment>
+          )}
         </div>
         <div
           style={{ color: 'red', display: visible ? 'inline-block' : 'none', marginLeft: '1px' }}>
@@ -181,5 +288,9 @@ class DateRanges extends Component {
     );
   }
 }
+
+const ButtonStyle = Styled(Button)`
+  margin: 0 5px;
+`;
 
 export default DateRanges;
