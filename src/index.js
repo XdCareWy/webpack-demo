@@ -1,16 +1,13 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { Button } from 'antd';
-import Styled from "styled-components";
-import "./demo.less";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Styled from 'styled-components';
+import './demo.less';
 
 const App = () => {
   return (
     <div>
       <Div />
-      <div className="item">
-        asdsd
-      </div>
+      <div className="item">asdsd</div>
     </div>
   );
 };
@@ -22,4 +19,4 @@ const Div = Styled.div`
   height: 100px;
 `;
 
-ReactDOM.render(<App />, document.getElementById("app"));
+ReactDOM.render(<App />, document.getElementById('app'));
