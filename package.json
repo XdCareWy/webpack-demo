@@ -11,6 +11,12 @@
     "server": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "browserslist": [
+    "Android >= 4.4",
+    "Chrome >= 5",
+    "iOS >= 8",
+    "Safari >= 7.1"
+  ],
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -19,6 +25,7 @@
     "@babel/core": "^7.0.1",
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
+    "autoprefixer": "^9.3.1",
     "babel-loader": "^8.0.2",
     "babel-plugin-import": "^1.8.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
@@ -33,6 +40,7 @@
     "less-loader": "^4.1.0",
     "mini-css-extract-plugin": "^0.4.2",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "postcss-loader": "^3.0.0",
     "style-loader": "^0.23.0",
     "styled-components": "^3.4.6",
     "url-loader": "^1.1.1",

@@ -44,6 +44,9 @@ module.exports = {
               },
               javascriptEnabled: true
             }
+          },
+          {
+            loader: "postcss-loader"
           }
         ]
       },
