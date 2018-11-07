@@ -10,7 +10,8 @@ module.exports = merge(common, {
     contentBase: "./dist",
     hot: true,
     historyApiFallback: true,
-    port: 8989,
+    overlay: true,
+    port: 8889,
     stats: {
       color: true
     },

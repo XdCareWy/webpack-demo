@@ -19,6 +19,12 @@ module.exports = {
     noParse: path.resolve(node_modules, "*/**/*.min.js"),
     rules: [
       {
+        enforce: "pre",
+        test: /\.js[x]?$/,
+        exclude: /node_modules/,
+        loader: "eslint-loader",
+      },
+      {
         test: /\.js[x]?$/,
         exclude: /(node_modules|vendor)/,
         use: {
