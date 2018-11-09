@@ -9,6 +9,7 @@
     "start": "webpack-dev-server --open --config webpack.dev.js",
     "clean": "rm -rf ./dist/bundle.js",
     "server": "node server.js",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "browserslist": [
@@ -47,6 +48,7 @@
     "babel-plugin-transform-class-properties": "^6.24.1",
     "clean-webpack-plugin": "^0.1.19",
     "compression": "^1.7.3",
+    "conventional-changelog": "^3.0.5",
     "css-loader": "^1.0.0",
     "eslint": "^5.8.0",
     "eslint-config-prettier": "^3.1.0",
