@@ -11,4 +11,5 @@ dist/
 *.pyc
 *.swp
 package-lock.json
-src1
+src1/
+webapp/

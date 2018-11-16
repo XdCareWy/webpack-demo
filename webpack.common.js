@@ -41,6 +41,9 @@ module.exports = {
           { loader: MiniCssExtractPlugin.loader },
           { loader: "css-loader" },
           {
+            loader: "postcss-loader"
+          },
+          {
             loader: "less-loader",
             options: {
               modifyVars: {
@@ -51,9 +54,6 @@ module.exports = {
               javascriptEnabled: true
             }
           },
-          {
-            loader: "postcss-loader"
-          }
         ]
       },
       {
