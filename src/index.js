@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import './demo.less';
-import WordAdder from './Demo';
+import AsyncApi from './exampleHooks/AsyncApi';
 
 const modalRoot = document.getElementById('modal-root');
 
@@ -65,9 +65,7 @@ const Parent = () => {
 const App = () => {
   return (
     <>
-      <WordAdder />
-      <Parent />
-      <div className="item">asdsd</div>
+      <AsyncApi />
     </>
   );
 };
