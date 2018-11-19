@@ -71,7 +71,7 @@ module.exports = {
     'no-dupe-keys': 2, //在对象中禁止属性重名
     'no-duplicate-case': 2, //在switch中禁止用例重名
     'no-irregular-whitespace': 2, //禁止在字符串和注释之外不规则的空白
-    'no-unused-vars': 2, //禁止出现未使用过的变量
+    'no-unused-vars': 1, //禁止出现未使用过的变量
     'no-case-declarations': 1, //不允许在 case 子句中使用词法声明
     'no-undef': 2,
     quotes: [2, 'single'],
