@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Table } from 'antd';
+import { Table, Button, Input } from 'antd';
 import { useAsync } from '../customHooks/index';
 
 const columns = [
@@ -18,9 +18,9 @@ const columns = [
   },
 ];
 
-const getData = () => {
+const getData = params => {
   return axios
-    .get('https://easy-mock.com/mock/5b02673795118136368f1a84/myApp/getList')
+    .get('https://easy-mock.com/mock/5b02673795118136368f1a84/myApp/getList', { params: params })
     .then(response => {
       const { status, data } = response;
       if (status === 200) {
@@ -39,14 +39,32 @@ const AsyncApi = () => {
   //   data = asyncHero.result.list;
   // }
   const [data, setData] = useState([]);
-  useEffect(() => {
-    getData().then(res => {
-      console.log(res);
-      setData(res.list);
-    });
-  }, []);
+  const [inputValue, setInputValue] = useState('');
+  const [params, setParams] = useState(null);
+
+  useEffect(
+    () => {
+      getData(params).then(res => {
+        console.log(res);
+        setData(res.list);
+      });
+    },
+    [params]
+  );
+
+  const handleSearch = () => {
+    console.log(inputValue);
+    setParams({ pageNum: inputValue });
+  };
+
+  const handleChange = e => {
+    setInputValue(e.target.value);
+  };
+
   return (
     <div>
+      <Input value={inputValue} onChange={handleChange} />
+      <Button onClick={handleSearch}>查询</Button>
       <Table columns={columns} dataSource={data} rowKey="id" />
     </div>
   );
