@@ -19,7 +19,7 @@ class DataList extends Component {
 
   getList = pageNum => {
     getListInterface(pageNum).then(response => {
-      const { status, data: { code, result: { list = [], total = 0 } = {} } = {} } = response.data;
+      const { status, data: { code, result: { list = [], total = 0 } = {} } = {} } = response;
       if (status === 200 && code === 0) {
         this.setState({ dataSource: list, total: total });
       }
