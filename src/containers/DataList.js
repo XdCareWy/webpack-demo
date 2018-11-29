@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Table } from 'antd';
-import { getListInterface } from '../api';
+import { getListAction } from '../action/index';
 
 class DataList extends Component {
   constructor(props) {
@@ -8,32 +9,21 @@ class DataList extends Component {
     this.state = {
       pageNum: 1,
       pageSize: 5,
-      total: 0,
-      dataSource: [],
     };
   }
 
   componentDidMount() {
-    this.getList(1);
+    this.props.getData(1);
   }
 
-  getList = pageNum => {
-    getListInterface(pageNum).then(response => {
-      const { status, data: { code, result: { list = [], total = 0 } = {} } = {} } = response;
-      if (status === 200 && code === 0) {
-        this.setState({ dataSource: list, total: total });
-      }
-    });
-  };
-
   handleChange = (page, pageSize) => {
-    console.log(pageSize);
     this.setState({ pageNum: page, pageSize: 5 });
-    this.getList(page);
+    this.props.getData(page);
   };
 
   render() {
-    const { total, dataSource, pageNum, pageSize } = this.state;
+    const { pageNum, pageSize } = this.state;
+    const { total, list } = this.props.data;
     const columns = [
       {
         title: 'id',
@@ -50,10 +40,11 @@ class DataList extends Component {
     ];
     return (
       <Table
+        loading={this.props.data === true}
         rowKey="id"
         current={pageNum}
         columns={columns}
-        dataSource={dataSource}
+        dataSource={list}
         pagination={{
           total: total,
           pageSize: pageSize,
@@ -64,4 +55,19 @@ class DataList extends Component {
   }
 }
 
-export default DataList;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DataList);
+
+function mapStateToProps(state) {
+  return {
+    data: state.data,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    getData: pageNum => dispatch(getListAction(pageNum)),
+  };
+}
