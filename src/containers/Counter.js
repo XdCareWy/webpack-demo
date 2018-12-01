@@ -12,6 +12,7 @@ const mapDispatchToProps = dispatch => {
   return {
     increase: () => dispatch(increase()),
     decrease: () => dispatch(decrease()),
+    increaseAsync: () => dispatch({ type: 'INCREASE_ASYNC' }),
   };
 };
 
