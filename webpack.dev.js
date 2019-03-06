@@ -25,5 +25,5 @@ module.exports = merge(common, {
     }
   },
   mode: 'development',
-  plugins: [new webpack.HotModuleReplacementPlugin(), new BundleAnalyzerPlugin()]
+  plugins: [new webpack.HotModuleReplacementPlugin()]
 });

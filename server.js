@@ -21,7 +21,7 @@ app.use(
 app.get('*', function(request, response) {
   response.sendFile(path.resolve(__dirname, 'dist', 'index.html'));
 });
-const server = app.listen(8010, '0.0.0.0', function() {
+const server = app.listen(8989, '0.0.0.0', function() {
   const host = server.address().address;
   const port = server.address().port;
   console.log('server listening at http://%s:%s', host, port);

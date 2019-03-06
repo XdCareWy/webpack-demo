@@ -7,9 +7,11 @@ import zhCN from 'antd/lib/locale-provider/zh_CN';
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import { createLogger } from 'redux-logger';
 import Styled from 'styled-components';
-import Counter from './containers/Counter';
+// import Counter from './containers/Counter';
 import reducer from './reducers/index';
-import { AddTodos, TodoList, DataList } from './containers/index';
+// import { AddTodos, TodoList } from './containers/index';
+import Loadable from 'react-loadable';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 const middleware = [];
 const logger = createLogger({
@@ -21,12 +23,60 @@ if (process.env.NODE_ENV === 'development') {
 
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(...middleware)));
 
+const A = Loadable({
+  loader: () => import('./containers/Counter'),
+  loading() {
+    return <div>A</div>;
+  }
+});
+const B = Loadable({
+  loader: () => import('./containers/DataList'),
+  loading() {
+    return <div>B</div>;
+  }
+});
+const C = Loadable({
+  loader: () => import('./containers/AddTodos'),
+  loading() {
+    return <div>C</div>;
+  }
+});
+const D = Loadable({
+  loader: () => import('./containers/TodoList'),
+  loading() {
+    return <div>D</div>;
+  }
+});
+
 const App = () => (
   <Div>
-    <AddTodos />
-    <TodoList />
-    <Counter />
-    <DataList />
+    {/*<Counter />*/}
+    {/*<DataList />*/}
+    <Router>
+      <div>
+        <ul>
+          <li>
+            <Link to="/A">A</Link>
+          </li>
+          <li>
+            <Link to="/about">B</Link>
+          </li>
+          <li>
+            <Link to="/topics">C</Link>
+          </li>
+          <li>
+            <Link to="/D">D</Link>
+          </li>
+        </ul>
+
+        <hr />
+
+        <Route exact path="/A" component={A} />
+        <Route path="/about" component={B} />
+        <Route path="/topics" component={C} />
+        <Route path="/D" component={D} />
+      </div>
+    </Router>
   </Div>
 );
 
