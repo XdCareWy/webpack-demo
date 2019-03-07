@@ -7,7 +7,7 @@ module.exports = merge(common, {
   devtool: 'source-map',
   devServer: {
     overlay: {
-      warnings: true,
+      warnings: false,
       errors: true
     },
     contentBase: './dist',

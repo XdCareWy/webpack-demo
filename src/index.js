@@ -10,7 +10,7 @@ import Styled from 'styled-components';
 // import Counter from './containers/Counter';
 import reducer from './reducers/index';
 // import { AddTodos, TodoList } from './containers/index';
-import Loadable from 'react-loadable';
+import Loadable from './common/LoadableComponent';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 const middleware = [];
@@ -23,30 +23,10 @@ if (process.env.NODE_ENV === 'development') {
 
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(...middleware)));
 
-const A = Loadable({
-  loader: () => import('./containers/Counter'),
-  loading() {
-    return <div>A</div>;
-  }
-});
-const B = Loadable({
-  loader: () => import('./containers/DataList'),
-  loading() {
-    return <div>B</div>;
-  }
-});
-const C = Loadable({
-  loader: () => import('./containers/AddTodos'),
-  loading() {
-    return <div>C</div>;
-  }
-});
-const D = Loadable({
-  loader: () => import('./containers/TodoList'),
-  loading() {
-    return <div>D</div>;
-  }
-});
+const A = Loadable(() => import('./containers/Counter'));
+const B = Loadable(() => import('./containers/DataList'));
+const C = Loadable(() => import('./containers/AddTodos'));
+const D = Loadable(() => import('./containers/TodoList'));
 
 const App = () => (
   <Div>
