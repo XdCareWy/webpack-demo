@@ -13,6 +13,7 @@ import Counter from './containers/Counter';
 import reducer from './reducers/index';
 import { AddTodos, TodoList, DataList } from './containers/index';
 import rootSaga from './sagas/CounterSaga';
+import Time from './components/Time';
 
 const middleware = [];
 const sagaMiddleware = createSagaMiddleware();
@@ -33,6 +34,7 @@ const App = () => (
     <AddTodos />
     <TodoList />
     <Counter />
+    <Time />
   </Div>
 );
 
@@ -44,7 +46,7 @@ const Div = Styled.div`
 ReactDOM.render(
   <Provider store={store}>
     <LocaleProvider locale={zhCN}>
-      <App />
+      <Time />
     </LocaleProvider>
   </Provider>,
   document.getElementById('app')
